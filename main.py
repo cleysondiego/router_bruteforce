@@ -11,7 +11,7 @@ for linha in linhas:
     if cont < 3:
 
         dados = {'user' : 'admin',
-                    'password' : linha}
+                 'pass' : linha}
 
         resposta = requests.post(url, data=dados)
 
@@ -24,5 +24,5 @@ for linha in linhas:
         cont += 1
     else:
         count = 0
-        sleep(120)
+        sleep(300)
 
